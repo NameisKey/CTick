@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputActivity"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:id="@+id/ll_tambah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambahkan Konser"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_nama_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_nama_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Konser"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_tanggal_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_tanggal_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tanggal Konser"
+                android:inputType="date"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_lokasi_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_lokasi_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Lokasi Konser"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_harga_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_harga_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Harga Tiket Konser"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_tentang_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_tentang_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tentang Konser"
+                android:inputType="textLongMessage"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_waktu_konser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="18dp">
+
+            <EditText
+                android:id="@+id/et_waktu_konser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Waktu Konser"
+                android:inputType="time"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_tambah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambahkan"
+            android:textAllCaps="true"
+            android:layout_marginTop="16dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

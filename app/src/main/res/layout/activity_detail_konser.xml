@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailKonserActivity"
+    android:background="@color/blue">
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/download"
+        android:layout_marginTop="30dp"
+        android:outlineSpotShadowColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_nama_konser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cold Play"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_poster"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Konser Info"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_konser"
+        android:layout_marginStart="20dp"/>
+
+    <ImageView
+        android:id="@+id/iv_tanggal"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/baseline_calendar_month_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_tanggal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="15 November 2023"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@+id/iv_tanggal"
+        app:layout_constraintStart_toEndOf="@+id/iv_tanggal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"/>
+
+    <ImageView
+        android:id="@+id/iv_jam"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/baseline_access_time_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tanggal"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_jam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="20:00 WIB"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@+id/iv_jam"
+        app:layout_constraintStart_toEndOf="@+id/iv_jam"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"/>
+
+    <ImageView
+        android:id="@+id/iv_lokasi"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_location_on"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_jam"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_lokasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Studion GBK, Jakarta"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@+id/iv_lokasi"
+        app:layout_constraintStart_toEndOf="@+id/iv_lokasi"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_judul_tentang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tentang Konser"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_lokasi"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_tentang_konser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chris Martin dan kawan-kawan telah mengumumkan kembalinya mereka yang sangat dinantikan ke Asia dan Australia dengan pertunjukan khusus yang akan berlangsung di stadion pada November 2023, sebagai bagian dari Music Of The Spheres World Tour yang memecahkan rekor.
+
+Pengumuman tersebut sekaligus menjadi tanda band asal Inggris itu akan melangsungkan pertunjukan pertamanya di Jakarta. Tanggal konser Coldplay di Jakarta berlangsung pada 15 November mendatang di Stadion Gelora Bung Karno."
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_judul_tentang"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"/>
+
+    <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:textAllCaps="true"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tentang_konser"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
