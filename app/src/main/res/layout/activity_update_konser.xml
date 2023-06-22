@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputActivity"
+    tools:context=".UpdateKonserActivity"
     android:background="@color/blue">
 
     <LinearLayout
@@ -17,10 +17,9 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/tv_tambah_konser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambahkan Konser"
+            android:text="Ubah Konser"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -140,10 +139,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_tambah"
+            android:id="@+id/btn_ubah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambahkan konser"
+            android:text="Ubah Konser"
             android:textAllCaps="true"
             android:layout_marginTop="16dp"/>
 
@@ -157,7 +156,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

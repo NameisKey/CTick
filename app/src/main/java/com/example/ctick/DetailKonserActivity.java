@@ -4,11 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.ctick.databinding.ActivityDetailKonserBinding;
+
 public class DetailKonserActivity extends AppCompatActivity {
+    private ActivityDetailKonserBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_konser);
+
+        binding = ActivityDetailKonserBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
     }
 }
