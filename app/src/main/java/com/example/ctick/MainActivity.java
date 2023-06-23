@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private KonserViewAdapter konserViewAdapter;
     private List<Input> data;
+    private int KonserItem;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,13 @@ public class MainActivity extends AppCompatActivity {
         konserViewAdapter = new KonserViewAdapter();
         binding.rvKonser.setLayoutManager(new LinearLayoutManager(this));
         binding.rvKonser.setAdapter(konserViewAdapter);
+
+        konserViewAdapter.setOnItemClickCallback(this::dataClick);
+
         konserViewAdapter.setOnItemLongClickListener(new KonserViewAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View v, KonserItem input, int position) {
+                int clickedPosition = position;
                 PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
                 popupMenu.inflate(R.menu.menu_popup);
                 popupMenu.setGravity(Gravity.RIGHT);
@@ -52,38 +58,42 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int idMenu = item.getItemId();
-                        if (idMenu == R.id.action_edit){
+                        if (idMenu == R.id.action_edit) {
                             Intent intent = new Intent(MainActivity.this, UpdateKonserActivity.class);
                             intent.putExtra("EXTRA_DATA", input);
                             startActivity(intent);
                             return true;
-                        }else if (idMenu == R.id.action_delete){
-                            String id = input.getId();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setTitle("Konfirmasi");
-                            builder.setMessage("Yakin ingin Menghapus Konser'" + data.get(position).getNama_konser() + "' ?");
-                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    deleteInput(id);
-                                }
-                            });
-                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                            AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+                        } else if (idMenu == R.id.action_delete) {
+                            if (input != null) {
+                                String id = input.getId();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                builder.setTitle("Konfirmasi");
+                                builder.setMessage("Yakin ingin Menghapus Konser '" + input.getNamaKonser() + "' ?");
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteInput(id);
+                                    }
+                                });
+                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            } else {
+                                // Tampilkan pesan atau lakukan tindakan jika input null
+                            }
                             return true;
-                        }else {
+                        } else {
                             return false;
                         }
                     }
                 });
                 popupMenu.show();
-            }
+            } 
         });
 
 
@@ -97,12 +107,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void dataClick(KonserItem item) {
+        Intent intent = new Intent(MainActivity.this, DetailKonserActivity.class);
+        intent.putExtra("EXTRA_DATA", item);
+        startActivity(intent);
+    }
+
     private void deleteInput(String id) {
         APIService api = Util.getRetrofit().create(APIService.class);
         Call<KonserItem> call = api.deleteKonser(id);
         call.enqueue(new Callback<KonserItem>() {
             @Override
             public void onResponse(Call<KonserItem> call, Response<KonserItem> response) {
+                Log.e("MainActivity", "Get Delete Response Code: " + response.code());
                 if(response.code()==200){
                     int success = response.body().getSuccess();
                     String message = response.body().getMessage();
@@ -120,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<KonserItem> call, Throwable t) {
-                System.out.println("Retrofit Error : " + t.getMessage());
+                Log.e("MainActivity", "Retrofit Error : " + t.getMessage());
                 Toast.makeText(MainActivity.this,"Retrofit Error : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -151,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                         konserViewAdapter.setData(dataKonser);
+
+                        data = new ArrayList<>(KonserItem);
 
                     }
                 }

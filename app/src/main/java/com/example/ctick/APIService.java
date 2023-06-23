@@ -1,6 +1,7 @@
 package com.example.ctick;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -30,6 +31,7 @@ public interface APIService {
     @PUT("update/{id}")
     Call<KonserItem>
     updateKonser(
+            @Path("id") String id,
             @Field("nama_konser") String namaKonser,
             @Field("tanggal_konser") String tanggalKonser,
             @Field("lokasi_konser") String lokasiKonser,
@@ -39,9 +41,10 @@ public interface APIService {
             @Field("gambar_konser") String gambarKonser
     );
 
-    @FormUrlEncoded
-    @PUT("delete/{id}")
+    @DELETE("delete/{id}")
     Call<KonserItem>
-    deleteKonser(@Path("id")String id);
+    deleteKonser(
+            @Path("id") String id
+    );
 
 }

@@ -1,8 +1,19 @@
 package com.example.ctick;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class KonserItem{
+public class KonserItem implements Parcelable {
+
+	@SerializedName("success")
+	private int success;
+
+	@SerializedName("message")
+	private String message;
 
 	@SerializedName("tentang_konser")
 	private String tentangKonser;
@@ -28,11 +39,60 @@ public class KonserItem{
 	@SerializedName("_id")
 	private String id;
 
-	@SerializedName("success")
-	private int success;
+	protected KonserItem(Parcel in) {
+		tentangKonser = in.readString();
+		lokasiKonser = in.readString();
+		hargaTiket = in.readInt();
+		waktuKonser = in.readString();
+		tanggalKonser = in.readString();
+		namaKonser = in.readString();
+		gambarKonser = in.readString();
+		id = in.readString();
+	}
 
-	@SerializedName("message")
-	private String message;
+	public static final Creator<KonserItem> CREATOR = new Creator<KonserItem>() {
+		@Override
+		public KonserItem createFromParcel(Parcel in) {
+			return new KonserItem(in);
+		}
+
+		@Override
+		public KonserItem[] newArray(int size) {
+			return new KonserItem[size];
+		}
+	};
+
+	public String getTentangKonser(){
+		return tentangKonser;
+	}
+
+	public String getLokasiKonser(){
+		return lokasiKonser;
+	}
+
+	public int getHargaTiket(){
+		return hargaTiket;
+	}
+
+	public String getWaktuKonser(){
+		return waktuKonser;
+	}
+
+	public String getTanggalKonser(){
+		return tanggalKonser;
+	}
+
+	public String getNamaKonser(){
+		return namaKonser;
+	}
+
+	public String getGambarKonser(){
+		return gambarKonser;
+	}
+
+	public String getId(){
+		return id;
+	}
 
 	public int getSuccess() {
 		return success;
@@ -42,67 +102,20 @@ public class KonserItem{
 		return message;
 	}
 
-	public void setTentangKonser(String tentangKonser){
-		this.tentangKonser = tentangKonser;
+	@Override
+	public int describeContents() {
+		return 0;
 	}
 
-	public String getTentangKonser(){
-		return tentangKonser;
-	}
-
-	public void setLokasiKonser(String lokasiKonser){
-		this.lokasiKonser = lokasiKonser;
-	}
-
-	public String getLokasiKonser(){
-		return lokasiKonser;
-	}
-
-	public void setHargaTiket(int hargaTiket){
-		this.hargaTiket = hargaTiket;
-	}
-
-	public int getHargaTiket(){
-		return hargaTiket;
-	}
-
-	public void setWaktuKonser(String waktuKonser){
-		this.waktuKonser = waktuKonser;
-	}
-
-	public String getWaktuKonser(){
-		return waktuKonser;
-	}
-
-	public void setTanggalKonser(String tanggalKonser){
-		this.tanggalKonser = tanggalKonser;
-	}
-
-	public String getTanggalKonser(){
-		return tanggalKonser;
-	}
-
-	public void setNamaKonser(String namaKonser){
-		this.namaKonser = namaKonser;
-	}
-
-	public String getNamaKonser(){
-		return namaKonser;
-	}
-
-	public void setGambarKonser(String gambarKonser){
-		this.gambarKonser = gambarKonser;
-	}
-
-	public String getGambarKonser(){
-		return gambarKonser;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getId(){
-		return id;
+	@Override
+	public void writeToParcel(@NonNull Parcel dest, int flags) {
+		dest.writeString(tentangKonser);
+		dest.writeString(lokasiKonser);
+		dest.writeInt(hargaTiket);
+		dest.writeString(waktuKonser);
+		dest.writeString(tanggalKonser);
+		dest.writeString(namaKonser);
+		dest.writeString(gambarKonser);
+		dest.writeString(id);
 	}
 }

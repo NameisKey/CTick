@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +16,7 @@ import retrofit2.Response;
 
 public class UpdateKonserActivity extends AppCompatActivity {
     private ActivityUpdateKonserBinding binding;
-    private Input input;
+    private KonserItem input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,14 @@ public class UpdateKonserActivity extends AppCompatActivity {
 
         input = getIntent().getParcelableExtra("EXTRA_DATA");
         String id = input.getId();
+
+        binding.etNamaKonser.setText(input.getNamaKonser());
+        binding.etTanggalKonser.setText(input.getTanggalKonser());
+        binding.etLokasiKonser.setText(input.getLokasiKonser());
+        binding.etHargaKonser.setText(String.valueOf(input.getHargaTiket()));
+        binding.etTentangKonser.setText(input.getTentangKonser());
+        binding.etWaktuKonser.setText(input.getWaktuKonser());
+        binding.etGambarKonser.setText(input.getGambarKonser());
 
         binding.btnUbah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +56,7 @@ public class UpdateKonserActivity extends AppCompatActivity {
                 boolean bolehUpdateGambarKonser = Util.inputError(gambar_konser,binding.etGambarKonser, "Gambar Konser");
 
                 if (bolehUpdateNamaKonser && bolehUpdateTanggalKonser && bolehUpdateLokasiKonser && bolehUpdateHargaTiket && bolehUpdateTentangKonser && bolehUpdateWaktuKonser && bolehUpdateGambarKonser){
-                    saveKonserToAPI(nama_konser, tanggal_konser,lokasi_konser,harga,tentang_konser,waktu_konser,gambar_konser);
+                    saveKonserToAPI(id, nama_konser, tanggal_konser,lokasi_konser,harga,tentang_konser,waktu_konser,gambar_konser);
                 }
 
             }
@@ -56,14 +65,15 @@ public class UpdateKonserActivity extends AppCompatActivity {
 
     }
 
-    private void saveKonserToAPI(String namakonser, String tanggalkonser, String lokasikonser, Integer hargaTiket, String tentangkonser, String waktukonser, String gambarkonser) {
+    private void saveKonserToAPI(String idKonser, String namakonser, String tanggalkonser, String lokasikonser, Integer hargaTiket, String tentangkonser, String waktukonser, String gambarkonser) {
         binding.progressbar.setVisibility(View.VISIBLE);
         APIService api = Util.getRetrofit().create(APIService.class);
-        Call<KonserItem> call = api.updateKonser(namakonser,tanggalkonser,lokasikonser,hargaTiket, tentangkonser,waktukonser,gambarkonser);
+        Call<KonserItem> call = api.updateKonser(idKonser,namakonser,tanggalkonser,lokasikonser,hargaTiket, tentangkonser,waktukonser,gambarkonser);
         call.enqueue(new Callback<KonserItem>() {
             @Override
             public void onResponse(Call<KonserItem> call, Response<KonserItem> response) {
                 binding.progressbar.setVisibility(View.VISIBLE);
+                Log.e("UpdateKonserActivity", "Response Code: " + response.message());
                 if (response.code()==200){
                     int success = response.body().getSuccess();
                     String message = response.body().getMessage();

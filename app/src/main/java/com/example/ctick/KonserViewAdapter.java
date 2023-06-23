@@ -1,5 +1,6 @@
 package com.example.ctick;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,14 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ctick.databinding.ItemKonserBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.ViewHolder>{
+    private OnItemClickCallback onItemClickCallback;
 
     private List<KonserItem> data = new ArrayList<>();
     private OnItemLongClickListener onItemLongClickListener;
@@ -26,6 +29,11 @@ public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.Vi
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener){
         this.onItemLongClickListener = onItemLongClickListener;
     }
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     @NonNull
     @Override
     public KonserViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +44,7 @@ public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.Vi
     public void onBindViewHolder(@NonNull KonserViewAdapter.ViewHolder holder, int position) {
         int pos = holder.getAdapterPosition();
         KonserItem item = data.get(pos);
+        Glide.with(holder.itemKonserBinding.ivFoto).load(item.getGambarKonser()).into(holder.itemKonserBinding.ivFoto);
         holder.itemKonserBinding.tvJudul.setText(item.getNamaKonser());
         holder.itemKonserBinding.tvTanggal.setText(item.getTanggalKonser());
         holder.itemKonserBinding.tvTempat.setText(item.getLokasiKonser());
@@ -46,6 +55,9 @@ public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.Vi
                 return false;
             }
         });
+        holder.itemView.setOnClickListener(v ->
+                onItemClickCallback.onItemClicked(item)
+        );
     }
 
     @Override
@@ -56,6 +68,7 @@ public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemKonserBinding itemKonserBinding;
 
+
         public ViewHolder(@NonNull ItemKonserBinding itemView) {
             super(itemView.getRoot());
             itemKonserBinding = itemView;
@@ -63,6 +76,10 @@ public class KonserViewAdapter extends RecyclerView.Adapter<KonserViewAdapter.Vi
     }
     public interface OnItemLongClickListener {
         void onItemLongClick(View v, KonserItem item, int position);
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(KonserItem item);
     }
 }
 
